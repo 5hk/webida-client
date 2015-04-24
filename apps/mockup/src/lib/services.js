@@ -130,6 +130,15 @@ var Services = Services || {};
 			url: url,
 			data: { page: options.page, limit: options.limit },
 			success: function (data) {
+				// for mockup
+				$.each(data.list, function (i, item) {
+					item['idx'] = i;
+					item['serviceType'] = "Script";
+					item['regDate'] = "";
+				});
+				// console.log(data);
+
+
 				callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -168,6 +177,11 @@ var Services = Services || {};
 			method: 'GET',
 			url: url,
 			success: function (data) {
+				// for mockup
+				data['serviceType'] = "Script";
+				data['serviceCategory'] = "Mobile";
+				// console.log(data);
+
 				callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -225,6 +239,33 @@ var Services = Services || {};
 			},
 			success: function (data) {
 				callback(null, data);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				callback(status, {
+					jqXHR: jqXHR,
+					textStatus, textStatus,
+					errorThrown: errorThrown
+				});
+			}
+		});
+	};
+
+	svc.messageCodeList = function (callback)  {
+		var url = DOMAIN + 'ocp/services';
+
+		$.ajax({
+			method: 'GET',
+			url: url,
+			success: function (data) {
+				// for mockup
+				var msglist = [];
+				$.each(data.list, function (i, item) {
+					msglist.push(item['messageCode']);
+				});
+				// console.log(msglist);
+
+
+				callback(null, msglist);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
