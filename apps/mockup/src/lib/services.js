@@ -205,7 +205,7 @@ var Services = Services || {};
 				scriptServiceDesc: data.scriptServiceDesc || '',
 				maxTimeunit: data.maxTimeunit || 'h',
 				maxTime: data.maxTime || '2',
-				messageCode: data.messageCode || ''
+				messageCode: data.messageCode || []
 			},
 			success: function (data) {
 				console.log(data);

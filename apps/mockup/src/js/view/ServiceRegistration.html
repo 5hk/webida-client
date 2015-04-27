@@ -8,6 +8,9 @@
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/theme/monokai.min.css">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.css">
 		<link rel="stylesheet" href="../../css/app.css">
+		<link rel="stylesheet" href="../../lib/bootstrap-tokenfield.css" type="text/css">
+		<link href="../../lib/tokenfield-typeahead.css" type="text/css" rel="stylesheet">
+		<link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="container">
@@ -68,15 +71,36 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/selection/active-line.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.js"></script>
 		<script src="../../lib/services.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-tokenfield.js" charset="UTF-8"></script>
+		<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 		<script>
 			$(document).ready(function() {
 			
+				$("#messageCode").val("");
 				var svc = Services.Service;
 				var svcName = $('#svcName');
 				var svcDesc = $('#svcDesc');
 				var messageCode = $('#messageCode');
 				var serviceType = $('#serviceType');
 				var serviceSource = $('#serviceSource');
+
+				var messageCodeList = null;
+				svc.messageCodeList(function (err, data) {
+					if (err) {
+						console.error(err);
+					} else {
+						messageCodeList = data;
+						console.log(messageCodeList);
+
+						$("#messageCode").tokenfield({
+							autocomplete: {
+								source: messageCodeList,
+								delay: 100
+							},
+							showAutocompleteOnFocus: true
+						});
+					}
+				});
 
 				var editor = CodeMirror.fromTextArea(document.getElementById('serviceSource'), {
 					lineNumbers: true,
@@ -86,7 +110,9 @@
 					styleActiveLine: true,
 					scrollbarStyle: 'simple'
 				});
+
 				
+
 				$('#btnShowlists').on('click', function () {
 					window.location.href = 'ServiceList.html';
 				});
