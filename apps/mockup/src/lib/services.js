@@ -2,7 +2,8 @@ var Services = Services || {};
 
 (function() {
 	'use strict';
-	var DOMAIN = 'http://172.21.110.100:8080/'
+	var DOMAIN = 'http://172.21.110.84:8080/';
+
 
 	Services.MsgFmt = {};
 	Services.Service = {};
@@ -199,14 +200,16 @@ var Services = Services || {};
 		$.ajax({
 			method: 'POST',
 			url: url,
-			data: {
+			contentType: 'application/json; charset=UTF-8',
+			dataType: 'json',
+			data: JSON.stringify ({
 				scriptServiceName: data.scriptServiceName || '',
 				scriptServiceSrc: data.scriptServiceSrc || '',
 				scriptServiceDesc: data.scriptServiceDesc || '',
 				maxTimeunit: data.maxTimeunit || 'h',
-				maxTime: data.maxTime || '2',
-				messageCode: data.messageCode || []
-			},
+				maxTime: data.maxTime || 2,
+				messageCode: data.messageCode
+			}),
 			success: function (data) {
 				console.log(data);
 				callback(null, data);
@@ -228,14 +231,16 @@ var Services = Services || {};
 		$.ajax({
 			method: 'PUT',
 			url: url,
-			data: {
+			contentType: 'application/json; charset=UTF-8',
+			dataType: 'json',
+			data: JSON.stringify({
 				scriptServiceName: data.scriptServiceName || '',
 				scriptServiceSrc: data.scriptServiceSrc || '',
 				scriptServiceDesc: data.scriptServiceDesc || '',
 				maxTimeunit: data.maxTimeunit || 'h',
-				maxTime: data.maxTime || '2',
-				messageCode: data.messageCode || ''
-			},
+				maxTime: data.maxTime || 2,
+				messageCode: data.messageCode
+			}),
 			success: function (data) {
 				callback(null, data);
 			},
