@@ -35,7 +35,7 @@
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
-		// <script src="//cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+		<script src="//cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 		<script src="../../lib/services.js"></script>
 		<script>
@@ -57,19 +57,13 @@
 							{ 'data': 'thingModel' },
 							{ 'data': 'messageName' },
 							{ 'data': 'formatVersion' },
-							{ 'data': 'regDate' }
+							{ 'data': 'regDate', render: function (data, type, row) {
+								return moment(data).format('lll');
+							}}
 						],
 						'createdRow': function (row, data, index) {
 							$(row).data('id', data.messageCode);
-						},
-						'columnDefs': [
-							{
-								'targets': [ 3 ],
-								'render': function (data, type, row) {
-									return moment(data).format('lll');
-								}
-							}
-						]
+						}
 					});
 
 					$('#msgTable').removeClass( 'display' ).addClass('table table-striped table-bordered table-hover');
