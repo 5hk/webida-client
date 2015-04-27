@@ -23,7 +23,7 @@
 					<tr>
 						<th></th>
 						<th>Service Name</th>
-						<th>Message Code</th>
+						<th>Message Mapping Cnt.</th>
 						<th>Type</th>
 						<th>Reg.Date</th>
 					</tr>
@@ -55,7 +55,7 @@
 					'columns': [
 					{ 'data': 'idx'},
 					{ 'data': 'scriptServiceName' },
-					{ 'data': 'messageCode' },
+					{ 'data': 'messageMappingCnt'},
 					{ 'data': 'serviceType'},
 					{ 'data': 'regDate' }
 					],
@@ -64,13 +64,9 @@
 					},
 					'columnDefs': [
 					{
-						'targets': [ 3 ],
-						'render': function (data, type, row) {
-							return moment(data).format('lll');
-						},
+						'targets': 0,
 						'searchable': false,
 						'orderable': false,
-						'targets': 0
 					}
 					],
 					'order': [[1, 'asc']]

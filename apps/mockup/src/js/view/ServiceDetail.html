@@ -86,6 +86,7 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.js"></script>
 		<script src="../../lib/services.js"></script>
 		<script type="text/javascript" src="../../lib/bootstrap-tokenfield.js" charset="UTF-8"></script>
+		<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 		<script>
 			$(document).ready(function() {
@@ -113,6 +114,15 @@
 						serviceCategory[0].value = data.serviceCategory;
 						serviceName[0].value = data.scriptServiceName;	
 						serviceDesc[0].value = data.scriptServiceDesc;
+
+						messageCode[0].value = "";
+						var messageCodeCnt = messageCode.length;
+						$.each(data.messageCode, function (i, item) {
+							messageCode[0].value += item;
+							if (i < (messageCodeCnt-1)) {
+								messageCode[0].value += ", "
+							}
+						});
 						messageCode[0].value = data.messageCode;
 						serviceType[0].value = data.serviceType;
 						editor.setValue(data.scriptServiceSrc);
@@ -125,9 +135,7 @@
 						console.error(err);
 					} else {
 						messageCodeList = data;
-						console.log("AAAAAAAAAAAAAAa");
-						console.log(messageCodeList);
-						console.log("AAAAAAAAAAAAAAa");
+						// console.log(messageCodeList);
 					}
 				});
 
@@ -228,9 +236,11 @@
 						$('#btnCancel').removeClass('hidden');
 						$('#btnDelete').addClass('hidden');
 					} else if (self.value === 'Save changes') {
+
+						var messages = messageCode[0].value;
 						var updateData = {
 							scriptServiceName: serviceName[0].value,
-							messageCode: messageCode[0].value,
+							messageCode: messages.split(', '),
 							scriptServiceDesc: serviceDesc [0].value,
 							scriptServiceSrc: editor.getValue()
 						};

@@ -134,7 +134,6 @@ var Services = Services || {};
 				$.each(data.list, function (i, item) {
 					item['idx'] = i;
 					item['serviceType'] = "Script";
-					item['regDate'] = "";
 				});
 				// console.log(data);
 
@@ -251,13 +250,13 @@ var Services = Services || {};
 	};
 
 	svc.messageCodeList = function (callback)  {
-		var url = DOMAIN + 'ocp/services';
+
+		var url = DOMAIN + 'ocp/messagefmt';
 
 		$.ajax({
 			method: 'GET',
 			url: url,
 			success: function (data) {
-				// for mockup
 				var msglist = [];
 				$.each(data.list, function (i, item) {
 					msglist.push(item['messageCode']);
@@ -266,6 +265,8 @@ var Services = Services || {};
 
 
 				callback(null, msglist);
+
+				// callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
@@ -275,5 +276,6 @@ var Services = Services || {};
 				});
 			}
 		});
+
 	};
 })();

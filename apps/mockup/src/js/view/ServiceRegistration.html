@@ -92,11 +92,13 @@
 				});
 
 				$('#btnRegister').on('click', function() {
+
+					var messages = messageCode[0].value;
 					var registerData = {
 						scriptServiceName: svcName[0].value,
 						scriptServiceSrc: editor.getValue(),
 						scriptServiceDesc: svcDesc[0].value,
-						messageCode: messageCode[0].value
+						messageCode: messages.split(', ')
 					};
 
 					svc.registerThing(registerData, function (err, data) {
