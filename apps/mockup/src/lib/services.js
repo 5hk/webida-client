@@ -130,6 +130,14 @@ var Services = Services || {};
 			url: url,
 			data: { page: options.page, limit: options.limit },
 			success: function (data) {
+				// for mockup
+				$.each(data.list, function (i, item) {
+					item['idx'] = i;
+					item['serviceType'] = "Script";
+				});
+				// console.log(data);
+
+
 				callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -168,6 +176,11 @@ var Services = Services || {};
 			method: 'GET',
 			url: url,
 			success: function (data) {
+				// for mockup
+				data['serviceType'] = "Script";
+				data['serviceCategory'] = "Mobile";
+				// console.log(data);
+
 				callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -234,5 +247,35 @@ var Services = Services || {};
 				});
 			}
 		});
+	};
+
+	svc.messageCodeList = function (callback)  {
+
+		var url = DOMAIN + 'ocp/messagefmt';
+
+		$.ajax({
+			method: 'GET',
+			url: url,
+			success: function (data) {
+				var msglist = [];
+				$.each(data.list, function (i, item) {
+					msglist.push(item['messageCode']);
+				});
+				// console.log(msglist);
+
+
+				callback(null, msglist);
+
+				// callback(null, data);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				callback(status, {
+					jqXHR: jqXHR,
+					textStatus, textStatus,
+					errorThrown: errorThrown
+				});
+			}
+		});
+
 	};
 })();
