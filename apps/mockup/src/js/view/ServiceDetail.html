@@ -13,6 +13,7 @@
 		<link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
 	</head>
 	<body>
+		<div id="deleteDlg"></div>
 		<div class="container">
 			<div class="row">
 				<h2>Service Details</h2>
@@ -163,7 +164,7 @@
 
 				$('#btnDelete').on('click', function () {
 					$('#deleteDlg').load('../../lib/dialog.html', function () {
-						var warnStr = 'Are you really delete the thing Model <strong>"' + serviceName[0].value + '"</strong>?';
+						var warnStr = 'Are you really delete the Service <strong>"' + serviceName[0].value + '"</strong>?';
 
 						$('#mbody-content').html(warnStr);
 
@@ -172,7 +173,7 @@
 								if (err) {
 									console.error(err);
 								} else {
-									window.location.href = 'ServiceList.html';
+									window.location.href = 'MessageList.html';
 								}
 							});
 						});
