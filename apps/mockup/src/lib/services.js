@@ -2,15 +2,16 @@ var Services = Services || {};
 
 (function() {
 	'use strict';
-	var DOMAIN = 'http://172.21.110.84:8080/';
 
+var DOMAIN = 'http://172.21.110.84:8080/';
+	// var DOMAIN = 'http://' + location.host + '/';
 
 	Services.MsgFmt = {};
 	Services.Service = {};
 	
 	var MsgFmt = Services.MsgFmt;
 	MsgFmt.lists = function (options, callback) {
-		var url = DOMAIN + 'ocp/messagefmt';
+		var url = DOMAIN + 'messagefmt';
 
 		$.ajax({
 			method: 'GET',
@@ -30,7 +31,7 @@ var Services = Services || {};
 	};
 
 	MsgFmt.deleteThing = function (messageCode, callback) {
-		var url = DOMAIN + 'ocp/messagefmt/'+ messageCode;
+		var url = DOMAIN + 'messagefmt/'+ messageCode;
 
 		$.ajax({
 			method: 'DELETE',
@@ -49,7 +50,7 @@ var Services = Services || {};
 	};
 
 	MsgFmt.details = function (messageCode, callback) {
-		var url = DOMAIN + 'ocp/messagefmt/' + messageCode;
+		var url = DOMAIN + 'messagefmt/' + messageCode;
 
 		$.ajax({
 			method: 'GET',
@@ -68,7 +69,7 @@ var Services = Services || {};
 	};
 
 	MsgFmt.registerThing = function (data, callback)  {
-		var url = DOMAIN + 'ocp/messagefmt/';
+		var url = DOMAIN + 'messagefmt/';
 
 		$.ajax({
 			method: 'POST',
@@ -95,7 +96,7 @@ var Services = Services || {};
 	};
 
 	MsgFmt.updateThing = function (messageCode, options, callback)  {
-		var url = DOMAIN + 'ocp/messagefmt/' + messageCode;
+		var url = DOMAIN + 'messagefmt/' + messageCode;
 
 		$.ajax({
 			method: 'PUT',
@@ -124,7 +125,7 @@ var Services = Services || {};
 
 	var svc = Services.Service;
 	svc.lists = function (options, callback) {
-		var url = DOMAIN + 'ocp/services';
+		var url = DOMAIN + 'services';
 
 		$.ajax({
 			method: 'GET',
@@ -134,7 +135,7 @@ var Services = Services || {};
 				// for mockup
 				$.each(data.list, function (i, item) {
 					item['idx'] = i;
-					item['serviceType'] = "Script";
+					item['serviceType'] = 'Script';
 				});
 				// console.log(data);
 
@@ -152,7 +153,7 @@ var Services = Services || {};
 	};
 
 	svc.deleteThing = function (scriptServiceId, callback) {
-		var url = DOMAIN + 'ocp/services/'+ scriptServiceId;
+		var url = DOMAIN + 'services/'+ scriptServiceId;
 
 		$.ajax({
 			method: 'DELETE',
@@ -171,17 +172,12 @@ var Services = Services || {};
 	};
 
 	svc.details = function (scriptServiceId, callback) {
-		var url = DOMAIN + 'ocp/services/' + scriptServiceId;
+		var url = DOMAIN + 'services/' + scriptServiceId;
 
 		$.ajax({
 			method: 'GET',
 			url: url,
 			success: function (data) {
-				// for mockup
-				data['serviceType'] = "Script";
-				data['serviceCategory'] = "Mobile";
-				// console.log(data);
-
 				callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -195,7 +191,7 @@ var Services = Services || {};
 	};
 
 	svc.registerThing = function (data, callback)  {
-		var url = DOMAIN + 'ocp/services/';
+		var url = DOMAIN + 'services/';
 
 		$.ajax({
 			method: 'POST',
@@ -205,6 +201,7 @@ var Services = Services || {};
 				scriptServiceName: data.scriptServiceName || '',
 				scriptServiceSrc: data.scriptServiceSrc || '',
 				scriptServiceDesc: data.scriptServiceDesc || '',
+				scriptServiceCategory: data.scriptServiceCategory || '',			
 				maxTimeunit: data.maxTimeunit || 'h',
 				maxTime: data.maxTime || 2,
 				messageCode: data.messageCode
@@ -223,7 +220,7 @@ var Services = Services || {};
 	};
 
 	svc.updateThing = function (scriptServiceId, data, callback)  {
-		var url = DOMAIN + 'ocp/services/' + scriptServiceId;
+		var url = DOMAIN + 'services/' + scriptServiceId;
 
 		$.ajax({
 			method: 'PUT',
@@ -252,7 +249,7 @@ var Services = Services || {};
 
 	svc.messageCodeList = function (callback)  {
 
-		var url = DOMAIN + 'ocp/messagefmt';
+		var url = DOMAIN + 'messagefmt';
 
 		$.ajax({
 			method: 'GET',

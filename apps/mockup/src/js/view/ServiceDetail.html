@@ -39,17 +39,6 @@
 							<div class="form-group">
 								<label for="serviceCategory">Service Category</label>
 								<input type="text" class="form-control" id="serviceCategory" readonly>
-
-								<div class="btn-group" id="categorybox">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									Category<span class="caret"></span>
-									</button>
-								    <ul class="dropdown-menu" role="menu">
-								    	<li class="divider"></li>
-								    	<li><a href="#">HomeSecurity</a></li>
-								    	<li><a href="#">Mobile</a></li>
-								  </ul>
-								</div>
 							</div>
 							<div class="form-group">
 								<label for="serviceName">Service Name</label>
@@ -78,21 +67,19 @@
 			</div>
 		</div>
 		
-		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/clike/clike.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/selection/active-line.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/selection/active-line.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.js"></script>
 		<script src="../../lib/services.js"></script>
 		<script type="text/javascript" src="../../lib/bootstrap-tokenfield.js" charset="UTF-8"></script>
 		<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 		<script>
 			$(document).ready(function() {
-
-				$("#categorybox").addClass("hidden");
 
 				var url = window.location.href;
 				var scriptServiceId = url.substr(url.indexOf('?')+1);
@@ -104,6 +91,7 @@
 				var messageCode = $('#messageCode');
 				var serviceType = $('#serviceType');
 				var serviceSource = $('#serviceSource');
+
 
 				var oldData = {};
 
@@ -148,15 +136,6 @@
 					styleActiveLine: true,
 					scrollbarStyle: 'simple'
 				});
-
-
-				// Service Category
-				$(".dropdown-menu li a").on("click", function () {
-					var selText = $(this).text();
-					$(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-				});
-
-				
 
 				$('#btnShowlists').on('click', function () {
 					window.location.href = 'ServiceList.html';
@@ -204,8 +183,6 @@
 					messageCode.attr('readonly', true);
 					serviceType.attr('readonly', true);
 					editor.setOption('readOnly', true);
-
-					$('#serviceCategory').removeClass('hidden');
 				});
 
 				$('#btnToggle').on('click', function () {
@@ -232,18 +209,33 @@
 						});
 
 						// $('#messageCode').tokenfield('writeable');
-						$('#serviceCategory').addClass('hidden');
-						$("#categorybox").removeClass("hidden");
 						$('#btnCancel').removeClass('hidden');
 						$('#btnDelete').addClass('hidden');
 					} else if (self.value === 'Save changes') {
+
+						// validation checks -->
+						if ($('#serviceCategory').val() == '') {
+							alert('Service Category is required field.');
+							return false;
+						}
+						if ($('#serviceName').val() == '') {
+							alert('Service Name is required field.');
+							return false;
+						}
+						if ($('#messageCode').val() == '') {
+							alert('Message Code is required field.');
+							return false;
+						}
+						// validation checks <--
+
 
 						var messages = $("#messageCode").val();
 						var updateData = {
 							scriptServiceName: serviceName[0].value,
 							messageCode: messages.split(', '),
 							scriptServiceDesc: serviceDesc [0].value,
-							scriptServiceSrc: editor.getValue()
+							scriptServiceSrc: editor.getValue(),
+							scriptServiceCategory: serviceCategory[0].value
 						};
 
 						svc.updateThing(scriptServiceId, updateData, function (err, data) {

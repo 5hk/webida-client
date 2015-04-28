@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Service Registration</title>
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.min.css">
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/theme/monokai.min.css">
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/theme/monokai.min.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.css">
 		<link rel="stylesheet" href="../../css/app.css">
 		<link rel="stylesheet" href="../../lib/bootstrap-tokenfield.css" type="text/css">
 		<link href="../../lib/tokenfield-typeahead.css" type="text/css" rel="stylesheet">
@@ -36,16 +36,7 @@
 							</div>
 							<div class="form-group">
 								<label for="serviceCategory">Service Category</label>
-								<input type="hidden" class="form-control" id="serviceCategory">
-								<div class="btn-group" id="categorybox">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									Category<span class="caret"></span>
-									</button>
-								    <ul class="dropdown-menu" role="menu">
-								    	<li><a href="#">HomeSecurity</a></li>
-								    	<li><a href="#">Mobile</a></li>
-								  </ul>
-								</div>
+								<input type="text" class="form-control" id="serviceCategory">
 							</div>
 							<div class="form-group">
 								<label for="svcName">Service Name</label>
@@ -61,10 +52,10 @@
 							</div>
 							<div class="form-group">
 								<label for="serviceType">Service Type</label>
-								<textarea class="form-control" row="2" id="serviceType"></textarea>
+								<textarea class="form-control" row="2" id="serviceType" val="Script">Script</textarea>
 							</div>
 							<div class="form-group">
-								<label for="serviceSource">Srouce</label>
+								<label for="serviceSource">Source</label>
 								<textarea id="serviceSource"></textarea>
 							</form>
 						</div>
@@ -76,15 +67,16 @@
 			</div>
 		</div>
 		
-		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/mode/clike/clike.min.js"></script>
 		<script src="../../lib/codemirror/mode/javascript.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/selection/active-line.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/selection/active-line.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/addon/scroll/simplescrollbars.min.js"></script>
 		<script src="../../lib/services.js"></script>
-		<script type="text/javascript" src="../../lib/bootstrap-tokenfield.js" charset="UTF-8"></script>
+		<script src="../../lib/bootstrap-tokenfield.js" charset="UTF-8"></script>
 		<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 		<script>
 			$(document).ready(function() {
@@ -96,6 +88,7 @@
 				var messageCode = $('#messageCode');
 				var serviceType = $('#serviceType');
 				var serviceSource = $('#serviceSource');
+				var scriptServiceCategory = $('#serviceCategory');
 
 				var messageCodeList = null;
 				svc.messageCodeList(function (err, data) {
@@ -113,13 +106,6 @@
 					}
 				});
 
-				// Service Category
-				$(".dropdown-menu li a").on("click", function () {
-					var selText = $(this).text();
-					$(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-					$("#serviceCategory").val(selText);
-				});
-
 				var editor = CodeMirror.fromTextArea(document.getElementById('serviceSource'), {
 					lineNumbers: true,
 					readOnly: false,
@@ -129,8 +115,6 @@
 					scrollbarStyle: 'simple'
 				});
 
-				
-
 				$('#btnShowlists').on('click', function () {
 					window.location.href = 'ServiceList.html';
 				});
@@ -138,11 +122,27 @@
 				$('#btnRegister').on('click', function(e) {
 					e.preventDefault();
 
+					// validation checks -->
+					if ($('#serviceCategory').val() == '') {
+						alert('Service Category is required field.');
+						return false;
+					}
+					if ($('#svcName').val() == '') {
+						alert('Service Name is required field.');
+						return false;
+					}
+					if ($('#messageCode').val() == '') {
+						alert('Message Code is required field.');
+						return false;
+					}
+					// validation checks <--
+
 					var messages = messageCode[0].value;
 					var registerData = {
 						scriptServiceName: svcName[0].value,
 						scriptServiceSrc: editor.getValue(),
 						scriptServiceDesc: svcDesc[0].value,
+						scriptServiceCategory: scriptServiceCategory[0].value,
 						messageCode: messages.split(', ')
 					};
 
