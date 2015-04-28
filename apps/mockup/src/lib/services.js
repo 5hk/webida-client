@@ -3,8 +3,7 @@ var Services = Services || {};
 (function() {
 	'use strict';
 
-var DOMAIN = 'http://172.21.110.84:8080/';
-	// var DOMAIN = 'http://' + location.host + '/';
+	var DOMAIN = 'http://' + location.host + '/';
 
 	Services.MsgFmt = {};
 	Services.Service = {};
