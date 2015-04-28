@@ -22,7 +22,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -41,7 +41,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -60,7 +60,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -87,7 +87,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -114,7 +114,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -144,7 +144,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -163,7 +163,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -187,7 +187,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -201,7 +201,6 @@ var Services = Services || {};
 			method: 'POST',
 			url: url,
 			contentType: 'application/json; charset=UTF-8',
-			dataType: 'json',
 			data: JSON.stringify ({
 				scriptServiceName: data.scriptServiceName || '',
 				scriptServiceSrc: data.scriptServiceSrc || '',
@@ -211,14 +210,12 @@ var Services = Services || {};
 				messageCode: data.messageCode
 			}),
 			success: function (data) {
-				console.log(data);
 				callback(null, data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.log(textStatus);
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -232,7 +229,6 @@ var Services = Services || {};
 			method: 'PUT',
 			url: url,
 			contentType: 'application/json; charset=UTF-8',
-			dataType: 'json',
 			data: JSON.stringify({
 				scriptServiceName: data.scriptServiceName || '',
 				scriptServiceSrc: data.scriptServiceSrc || '',
@@ -247,7 +243,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
@@ -276,7 +272,7 @@ var Services = Services || {};
 			error: function (jqXHR, textStatus, errorThrown) {
 				callback(status, {
 					jqXHR: jqXHR,
-					textStatus, textStatus,
+					textStatus: textStatus,
 					errorThrown: errorThrown
 				});
 			}
