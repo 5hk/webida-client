@@ -35,6 +35,19 @@
 								<input id="btnRegister" class="btn btn-primary btn-right" type="submit" value="Register">
 							</div>
 							<div class="form-group">
+								<label for="serviceCategory">Service Category</label>
+								<input type="hidden" class="form-control" id="serviceCategory">
+								<div class="btn-group" id="categorybox">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+									Category<span class="caret"></span>
+									</button>
+								    <ul class="dropdown-menu" role="menu">
+								    	<li><a href="#">HomeSecurity</a></li>
+								    	<li><a href="#">Mobile</a></li>
+								  </ul>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="svcName">Service Name</label>
 								<input type="text" class="form-control" id="svcName">
 							</div>
@@ -90,8 +103,6 @@
 						console.error(err);
 					} else {
 						messageCodeList = data;
-						console.log(messageCodeList);
-
 						$("#messageCode").tokenfield({
 							autocomplete: {
 								source: messageCodeList,
@@ -100,6 +111,13 @@
 							showAutocompleteOnFocus: true
 						});
 					}
+				});
+
+				// Service Category
+				$(".dropdown-menu li a").on("click", function () {
+					var selText = $(this).text();
+					$(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+					$("#serviceCategory").val(selText);
 				});
 
 				var editor = CodeMirror.fromTextArea(document.getElementById('serviceSource'), {

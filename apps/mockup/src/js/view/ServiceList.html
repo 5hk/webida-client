@@ -70,9 +70,15 @@
 						'targets': 0,
 						'searchable': false,
 						'orderable': false,
+					},
+					{
+						'targets': 4,
+						'render': function (data, type, row) {
+							return moment(data).format('lll');
+						}
 					}
 					],
-					'order': [[1, 'asc']]
+					'order': [[4, 'desc']]
 				});
 
 				t.on('order.dt search.dt', function () {
