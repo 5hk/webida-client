@@ -116,15 +116,16 @@
 						serviceName[0].value = data.scriptServiceName;	
 						serviceDesc[0].value = data.scriptServiceDesc;
 
-						messageCode[0].value = "";
-						var messageCodeCnt = messageCode.length;
+						var msg = "";
+						var messageCodeCnt = data.messageCode.length;
 						$.each(data.messageCode, function (i, item) {
-							messageCode[0].value += item;
+							msg += item;
 							if (i < (messageCodeCnt-1)) {
-								messageCode[0].value += ", "
+								msg += ", ";
 							}
 						});
-						messageCode[0].value = data.messageCode;
+						messageCode[0].value = msg;
+
 						serviceType[0].value = data.serviceType;
 						editor.setValue(data.scriptServiceSrc);
 					}
@@ -136,7 +137,6 @@
 						console.error(err);
 					} else {
 						messageCodeList = data;
-						// console.log(messageCodeList);
 					}
 				});
 
@@ -238,15 +238,13 @@
 						$('#btnDelete').addClass('hidden');
 					} else if (self.value === 'Save changes') {
 
-						var messages = messageCode[0].value;
+						var messages = $("#messageCode").val();
 						var updateData = {
 							scriptServiceName: serviceName[0].value,
 							messageCode: messages.split(', '),
 							scriptServiceDesc: serviceDesc [0].value,
 							scriptServiceSrc: editor.getValue()
 						};
-
-						console.log(updateData);
 
 						svc.updateThing(scriptServiceId, updateData, function (err, data) {
 							if (err) {
