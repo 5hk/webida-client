@@ -38,7 +38,7 @@
 								<label for="msgVer">Format Ver.</label>
 								<input type="text" class="form-control" id="msgVer" placeholder="Enter format version">
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div>
 									<label for="deviceModel">Thing Model</label>
 								</div>
@@ -48,7 +48,7 @@
 									</div>
 									<input id="btnSearch" class="btn btn-default " type="button" value="Search">
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<label for="deviceDesc">Description</label>
 								<textarea class="form-control" id="deviceDesc" row="2" placeholder="Enter description"></textarea>
@@ -104,7 +104,7 @@
 
 					var messageName = msgName[0].value,
 					formatVersion = msgVer[0].value,
-					thingModel = deviceModel[0].value,
+					// thingModel = deviceModel[0].value,
 					description = deviceDesc[0].value,
 					format = editor.getValue();
 
@@ -112,7 +112,7 @@
 						var registerData = {
 							messageName: messageName,
 							formatVersion: formatVersion,
-							thingModel: thingModel,
+							// thingModel: thingModel,
 							description: description,
 							format: format
 						};
