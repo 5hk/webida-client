@@ -41,7 +41,7 @@
 								<label for="msgVer">Format Ver.</label>
 								<input type="text" class="form-control" id="msgVer" placeholder="Enter format version" disabled>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div>
 									<label for="deviceModel">Thing Model</label>
 								</div>
@@ -51,7 +51,7 @@
 									</div>
 									<input id="btnSearch" class="btn btn-default " type="button" value="Search" disabled>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<label for="deviceDesc">Description</label>
 								<textarea class="form-control" id="deviceDesc" row="2" placeholder="Enter description" disabled></textarea>
@@ -82,7 +82,7 @@
 				var MsgFmt = Services.MsgFmt;
 				var msgName = $('#msgName');
 				var msgVer = $('#msgVer');
-				var deviceModel = $('#deviceModel');
+				// var deviceModel = $('#deviceModel');
 				var deviceDesc = $('#deviceDesc');
 				var msgFormat = $('#msgFormat');
 
@@ -96,7 +96,7 @@
 
 						msgName[0].value = data.messageName;	
 						msgVer[0].value = data.formatVersion;
-						deviceModel[0].value = data.thingModel;
+						// deviceModel[0].value = data.thingModel;
 						deviceDesc[0].value = data.description;
 
 						editor.setValue(data.format);
@@ -151,13 +151,13 @@
 
 					msgName[0].value = oldData.messageName;
 					msgVer[0].value = oldData.formatVersion;
-					deviceModel[0].value = oldData.thingModel;
+					// deviceModel[0].value = oldData.thingModel;
 					deviceDesc[0].value = oldData.description;
 					editor.setValue(oldData.format);
 
 					msgName.attr('disabled', true);
 					msgVer.attr('disabled', true);
-					deviceModel.attr('disabled', true);
+					// deviceModel.attr('disabled', true);
 					deviceDesc.attr('disabled', true);
 					msgFormat.attr('disabled', true);
 					$('#btnSearch').attr('disabled', true);
@@ -184,7 +184,7 @@
 						var updateData = {
 							messageName: msgName[0].value,
 							formatVersion: msgVer[0].value,
-							thingModel: deviceModel[0].value,
+							// thingModel: deviceModel[0].value,
 							description: deviceDesc[0].value,
 							format: editor.getValue()
 						};

@@ -76,7 +76,7 @@ var Services = Services || {};
 			data: {
 				messageName: data.messageName || '',
 				formatVersion: data.formatVersion || '',
-				thingModel: data.thingModel || '',
+				// thingModel: data.thingModel || '',
 				description: data.description || '',
 				formatType: data.formatType || 'json',
 				format: data.format || ''
@@ -103,7 +103,7 @@ var Services = Services || {};
 			data: {				
 				messageName: options.messageName || '',
 				formatVersion: options.formatVersion || '',
-				thingModel: options.thingModel || '',
+				// thingModel: options.thingModel || '',
 				description: options.description || '',
 				formatType: options.formatType || '',
 				format: options.format || ''
