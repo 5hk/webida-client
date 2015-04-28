@@ -58,7 +58,9 @@
 					{ 'data': 'scriptServiceName' },
 					{ 'data': 'messageMappingCnt', 'width': '17%' },
 					{ 'data': 'serviceType'},
-					{ 'data': 'regDate' }
+					{ 'data': 'regDate', render: function (data, type, row) {
+						return moment(data).format('lll');
+					}}
 					],
 					'createdRow': function (row, data, index) {
 						$(row).data('id', data.scriptServiceId);
