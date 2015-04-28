@@ -117,7 +117,8 @@
 					window.location.href = 'ServiceList.html';
 				});
 
-				$('#btnRegister').on('click', function() {
+				$('#btnRegister').on('click', function(e) {
+					e.preventDefault();
 
 					var messages = messageCode[0].value;
 					var registerData = {
